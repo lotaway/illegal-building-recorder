@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user/user",
+    "pages/add/add",
+    "pages/handler/handler",
+    "pages/missionRecordDetail/missionRecordDetail",
+    "pages/test/test"
+  ],
+  "tabBar": {
+    "color": "#7f8389",
+    "selectedColor": "#09bb07",
+    "backgroundColor": "",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "public/icon/icon-eye.png",
+        "selectedIconPath": "public/icon/icon-eye-active.png",
+        "text": "查询"
+      },
+      {
+        "pagePath": "pages/handler/handler",
+        "iconPath": "public/icon/icon-add.png",
+        "selectedIconPath": "public/icon/icon-add-active.png",
+        "text": "录入"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "public/icon/icon-user.png",
+        "selectedIconPath": "public/icon/icon-user-active.png",
+        "text": "账号"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "汕头市违法建设摸查治理",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "useExtendedLib": {
+    "weui": true
+  }
+}

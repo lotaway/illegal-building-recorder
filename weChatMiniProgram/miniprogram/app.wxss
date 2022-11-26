@@ -1,0 +1,98 @@
+.mp-form {
+    padding-top: 0;
+}
+
+.mp-cells .weui-cells__title {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 0;
+    background: #ebebeb;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 200px 0;
+    box-sizing: border-box;
+}
+
+.clearf:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.important {
+    color: #09bb07;
+}
+
+.tip {
+    color: #888;
+}
+
+.component-tips {
+    display: block;
+    text-align: center;
+    padding: 10px;
+}
+
+.component-status {
+    text-align: center;
+}
+
+.component-status .value {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 12px;
+    /*line-height: 40px;*/
+    line-height: 100%;
+    margin: 0 0 0 5px;
+    transform: rotateZ(-45deg);
+    padding: 0;
+    background: #fff;
+    color: #999999;
+    border: 2px solid #999999;
+}
+
+.component-status .value.active {
+    border-color: #09bb07;
+    color: #09bb07;
+}
+
+.component-status .value.warn {
+    border-color: #e94f4f;
+    color: #e94f4f;
+}
+
+.status-no {
+    font-size: 24px;
+    text-align: center;
+    opacity: 0.3;
+    padding: 33% 10px;
+}
+
+.page-title {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 25px 15px;
+    background: #ebebeb;
+}
+
+.hide {
+    display: none;
+}
+
+.btn.block {
+    width: auto;
+    margin: 10px;
+}

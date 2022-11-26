@@ -1,0 +1,40 @@
+.page-user .weui-form {
+    padding: 0;
+    background: #ebebeb;
+}
+
+.page-user .title {
+    display: block;
+    margin: 0 auto;
+    padding: 15px 0;
+}
+
+.page-user .signed {
+
+}
+
+.mp-form-page .weui-form__control-area {
+    margin: 0;
+}
+
+.account-name {
+  margin-top: -40px;
+}
+
+.page-user .control {
+    margin-top: -60px;
+}
+
+.page-user .weui-form .label,
+.page-user .weui-form .input {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.page-user .weui-form .input {
+    padding: 0 3px;
+}
+
+.page-user .weui-from .btn-submit {
+    width: auto;
+}

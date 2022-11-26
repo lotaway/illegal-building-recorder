@@ -1,0 +1,188 @@
+<view class="page-mission-record-detail">
+    <text class="page-title text-center">{{record.belongArea.value}}{{record.msgType.value ===
+        msgTypeEnum.investigate.value ? msgTypeEnum.investigate.title : msgTypeEnum.deal.title}}工作台账
+    </text>
+    <!--    任务记录详情，主要用于查看、审核等-->
+    <mp-cells title="{{record.title}}">
+        <mp-cell ext-class="mp-cell" title="{{record.codeNumber.title}}" value="{{record.codeNumber.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.msgType.title}}"
+                 value="{{record.msgType.value === msgTypeEnum.investigate.value ? msgTypeEnum.investigate.title : msgTypeEnum.deal.title}}"></mp-cell>
+    </mp-cells>
+    <mp-cells wx:if="{{record.msgType.value === msgTypeEnum.investigate.value}}">
+        <mp-cell ext-class="mp-cell" title="{{record.buildingAddress.title}}"
+                 value="{{record.buildingAddress.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.propertyOwnerType.title}}"
+                 value="{{record.propertyOwnerType.valueDesc}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" wx:if="{{record.propertyOwnerType.value !== propertyOwnerTypeEnum.unknown.value}}"
+                 title="{{record.propertyOwner.value === propertyOwnerTypeEnum.unit.value ? record.propertyOwnerName.unitTitle : record.propertyOwnerName.personalTitle}}"
+                 value="{{record.propertyOwnerName.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" wx:if="{{record.propertyOwnerType.value !== propertyOwnerTypeEnum.unknown.value}}"
+                 title="{{record.credentialsType.title}}" value="{{record.credentialsType.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" wx:if="{{record.propertyOwnerType.value !== propertyOwnerTypeEnum.unknown.value}}"
+                 title="{{record.credentialsNumber.title}}" value="{{record.credentialsNumber.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" wx:if="{{record.propertyOwnerType.value === propertyOwnerTypeEnum.unit.value}}"
+                 title="{{record.relative.government.title}}"
+                 value="{{record.relative.government.selected ? '是' : '否'}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" wx:if="{{record.propertyOwnerType.value === propertyOwnerTypeEnum.unit.value}}"
+                 title="{{record.relative.armedForces.title}}"
+                 value="{{record.relative.armedForces.selected ? '是' : '否'}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.belongType.title}}" value="{{record.belongType.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.landType.title}}" value="{{record.landType.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.curtilage.title}}"
+                 value="{{record.curtilage.selected ? '是' : '否'}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.coverArea.title}}"
+                 value="{{record.coverArea.value}}{{record.buildArea.valueUnit}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.buildArea.title}}"
+                 value="{{record.buildArea.value}}{{record.buildArea.valueUnit}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.buildingStorey.title}}"
+                 value="{{record.buildingStorey.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.buildingStartDate.title}}"
+                 value="{{record.buildingStartDate.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.buildingEndDate.title}}"
+                 value="{{record.buildingEndDate.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.engineeringSituation.title}}"
+                 value="{{record.engineeringSituation.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.engineeringAge.title}}"
+                 value="{{record.engineeringAge.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.useFor.title}}">
+            <text wx:for="{{record.useFor.value}}" wx:key="item">{{item}}</text>
+        </mp-cell>
+        <mp-cell ext-class="mp-cell" wx:for="{{record.certificate.value}}" wx:key="name" title="{{item.title}}"
+                 value="{{item.value}}"></mp-cell>
+        <mp-cell ext-class="mp-cell" title="{{record.illegalType.title}}">
+            <text wx:for="{{record.illegalType.value}}" wx:key="item">{{item}}</text>
+        </mp-cell>
+        </mp-cells>
+        <view wx:if="{{record.msgType.value === msgTypeEnum.investigate.value}}">
+            <mp-cells wx:for="{{record.otherEvidence.value}}" wx:for-item="oe" wx:if="{{oe.selected}}" title="{{oe.title}}">
+                <view class="photo-list ul clearf">
+                    <view class="li" wx:for="{{oe.filePaths}}" wx:key="item">
+                        <image mode="widthFix" src="{{item}}" class="photo"></image>
+                    </view>
+                </view>
+            </mp-cells>
+        </view>
+        <mp-cells wx:if="{{record.msgType.value === msgTypeEnum.investigate.value}}">
+            <mp-cell ext-class="mp-cell" title="{{record.reporter.title}}" value="{{record.reporter.value}}"></mp-cell>
+            <mp-cell ext-class="mp-cell" title="{{record.confirmer.title}}"
+                     value="{{record.confirmer.value}}"></mp-cell>
+            <mp-cell ext-class="mp-cell" title="{{record.leader.title}}" value="{{record.leader.value}}"></mp-cell>
+        </mp-cells>
+        <mp-cells wx:if="{{record.msgType.value === msgTypeEnum.deal.value}}">
+            <mp-cell ext-class="mp-cell" title="{{record.belongArea.title}}"
+                     value="{{record.belongArea.value}}"></mp-cell>
+            <mp-cell ext-class="mp-cell" title="{{record.targetUnit.title}}"
+                     value="{{record.targetUnit.value}}"></mp-cell>
+            <mp-cell ext-class="mp-cell" title="{{record.buildType.title}}"
+                     value="{{record.buildType.value === record.buildType.enum.farmer.value ? record.buildType.enum.farmer.title : record.buildType.enum.other.title}}"></mp-cell>
+            <mp-cell ext-class="mp-cell" title="{{record.buildName.title}}"
+                     value="{{record.buildName.value}}"></mp-cell>
+            <mp-cell ext-class="mp-cell" title="{{record.buildArea.title}}">
+                <text class="value">{{record.buildArea.value}}{{record.buildArea.valueUnit}}</text>
+            </mp-cell>
+            <mp-cell ext-class="mp-cell"
+                     title="{{record.missionDate.dealTitle}}"
+                     value="{{record.missionDate.value}}"></mp-cell>
+        </mp-cells>
+        <mp-cells ext-class="mp-cells" wx:if="{{record.msgType.value === msgTypeEnum.deal.value}}"
+                  title="{{record.beforePhoto.title}}">
+            <view class="photo-list ul clearf">
+                <view class="li" wx:for="{{record.beforePhoto.value}}" wx:key="item">
+                    <image mode="widthFix" src="{{item}}" class="photo"></image>
+                </view>
+            </view>
+        </mp-cells>
+        <mp-cells ext-class="mp-cells" wx:if="{{record.msgType.value === msgTypeEnum.deal.value}}"
+                  title="{{record.dealingPhoto.title}}">
+            <view class="photo-list ul clearf">
+                <view class="li" wx:for="{{record.dealingPhoto.value}}" wx:key="item">
+                    <image mode="widthFix" src="{{item}}" class="photo"></image>
+                </view>
+            </view>
+        </mp-cells>
+        <mp-cells ext-class="mp-cells" wx:if="{{record.msgType.value === msgTypeEnum.deal.value}}"
+                  title="{{record.donePhoto.title}}">
+            <view class="photo-list ul clearf">
+                <view class="li" wx:for="{{record.donePhoto.value}}" wx:key="item">
+                    <image mode="widthFix" src="{{item}}" class="photo"></image>
+                </view>
+            </view>
+        </mp-cells>
+        <!--   状态显示 -->
+        <view class="status component-status">
+            <text class="value disabled"
+                  wx:if="{{record.status === recordStatusEnum.waitForCheck.value}}">
+                {{recordStatusEnum.waitForCheck.title}}
+            </text>
+            <text class="value active"
+                  wx:if="{{record.status >= recordStatusEnum.checked.value && record.status !== recordStatusEnum.unlocked.value}}">
+                {{recordStatusEnum.checked.title2}}
+            </text>
+            <text class="value disabled" wx:if="{{record.status === recordStatusEnum.checked.value}}">
+                {{recordStatusEnum.checked.title}}
+            </text>
+            <text class="value active"
+                  wx:if="{{record.status >= recordStatusEnum.confirmed.value && record.status !== recordStatusEnum.unlocked.value}}">
+                {{recordStatusEnum.confirmed.title2}}
+            </text>
+            <text class="value disabled" wx:if="{{record.status === recordStatusEnum.confirmed.value}}">
+                {{recordStatusEnum.confirmed.title}}
+            </text>
+            <text class="value active" wx:if="{{record.status === recordStatusEnum.reconfirmed.value}}">
+                {{recordStatusEnum.reconfirmed.title}}
+            </text>
+            <text class="value warn"
+                  wx:if="{{record.status === recordStatusEnum.unlocked.value}}">
+                {{recordStatusEnum.unlocked.title}}
+            </text>
+        </view>
+        <!--  可用操作  -->
+        <view class="control-bar">
+            <button class="btn block btn-download-document text-center"
+                    wx:if="{{record.status === recordStatusEnum.reconfirmed.value}}" type="primary"
+                    bindtap="showDocument">
+                <text class="text">{{control.showDocument.title}}</text>
+                <image class="icon" mode="widthFix" src="../../public/icon/icon-download.png"></image>
+            </button>
+            <button class="btn block"
+                    wx:if="{{record.msgType.value === msgTypeEnum.deal.value && record.investigateId !== 0}}"
+                    type="default"
+                    bindtap="showInvestigateInfo">
+                {{control.showInvestigate.title}}
+            </button>
+            <button class="btn block"
+                    wx:if="{{user.id === record.submitUserId && record.status === recordStatusEnum.unlocked.value}}"
+                    type="default"
+                    bindtap="editInvestigateInfo">
+                {{control.editInvestigate.title}}
+            </button>
+            <button class="btn block"
+                    wx:if="{{record.msgType.value === msgTypeEnum.investigate.value && record.dealId !== 0}}"
+                    type="default"
+                    bindtap="showDealInfo">{{control.dealDetail.title}}
+            </button>
+            <button class="btn block"
+                    wx:if="{{user.id === record.submitUserId && (record.dealId === 0 || (record.msgType.value === msgTypeEnum.deal.value && record.status === recordStatusEnum.unlocked.value))}}"
+                    type="default" bindtap="editDealInfo">
+                {{record.dealId === 0
+                ? control.createDeal.title
+                : control.editDeal.title}}
+            </button>
+            <button class="btn block"
+                    wx:if="{{record.status === recordStatusEnum.waitForCheck.value && user.rank === userRankEnum.street.value}}"
+                    type="primary" bindtap="checkPass">{{control.checkPass.title}}
+            </button>
+            <button class="btn block"
+                    wx:if="{{user.rank === userRankEnum.area.value && record.status === recordStatusEnum.checked.value}}"
+                    type="primary" bindtap="confirmPass">{{control.confirmPass.title}}
+            </button>
+            <button class="btn block"
+                    wx:if="{{user.rank >= userRankEnum.city.value && record.status === recordStatusEnum.confirmed.value}}"
+                    type="primary" bindtap="reconfirmPass">{{control.reconfirmPass.title}}
+            </button>
+            <button class="btn block"
+                    wx:if="{{record.status !== recordStatusEnum.unlocked.value && user.rank >= userRankEnum.street.value}}"
+                    type="warn" bindtap="unlockRecord">{{control.unlockRecord.title}}
+            </button>
+        </view>
+</view>

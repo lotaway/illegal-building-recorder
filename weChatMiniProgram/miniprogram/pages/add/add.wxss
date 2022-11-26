@@ -1,0 +1,9 @@
+/* miniprogram/pages/add/add.wxss */
+
+.label {
+  display: block;
+}
+
+.no-weui-cell__hd .weui-cell__hd {
+  padding-right: 0;
+}

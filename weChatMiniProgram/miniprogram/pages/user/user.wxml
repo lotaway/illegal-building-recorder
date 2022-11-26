@@ -1,0 +1,50 @@
+<view class="page-user">
+	<cover-image src="{{welcomeBanner}}" />
+	<text class="title text-center">{{title}}</text>
+	<!-- 已登录 -->
+	<view class="signed" wx:if="{{isSignIn}}">
+		<!-- 已登录的用户信息，和下级统计信息 -->
+		<text>您已登录无需重复登录</text>
+	</view>
+	<!-- 未登录 -->
+	<view class="sign-in" wx:if="{{!changePassword.isShow && !isSignIn}}">
+		<mp-form-page>
+			<mp-form>
+				<mp-cells ext-class="mp-cells account-name" title="{{form.accountName.tip}}">
+					<mp-cell title="{{form.accountName.title}}">
+						<input type="text" class="input" id="{{form.accountName.name}}" placeholder="{{form.accountName.placeHolder}}" value="{{form.accountName.value}}" bindblur="accountNameInputBlur" />
+					</mp-cell>
+					<mp-cell title="{{form.password.title}}">
+          <input type="text" class="input" password="{{true}}" id="{{form.password.name}}" placeholder="{{form.password.placeHolder}}" value="{{form.password.value}}" bindblur="passwordInputBlur" />
+					</mp-cell>
+				</mp-cells>
+			</mp-form>
+			<view slot="button" class="control">
+				<button class="weui-btn btn-submit btn block" size="default" type="primary" bindtap="formSubmit" disabled="{{form.submit.disabled}}">{{form.submit.title}}</button>
+				<button class="weui-btn btn-tab btn block" size="default" type="default" bindtap="toggleChangePasswordView" data-toggle="true">{{changePassword.btnEntryTitle}}</button>
+			</view>
+		</mp-form-page>
+	</view>
+	<!-- 修改密码 -->
+	<view class="change-password-view" wx:if="{{changePassword.isShow}}">
+		<mp-form-page>
+			<mp-form>
+				<mp-cells ext-class="mp-cells account-name">
+					<mp-cell title="{{changePassword.form.accountName.title}}">
+						<input type="text" class="input" id="{{changePassword.form.accountName.name}}" placeholder="{{changePassword.form.accountName.placeHolder}}" value="{{changePassword.form.accountName.value}}" bindblur="changePasswordAccountNameInputBlur" />
+					</mp-cell>
+					<mp-cell title="{{changePassword.form.oldPassword.title}}">
+						<input type="text" password="{{true}}" id="{{changePassword.form.oldPassword.name}}" placeholder="{{changePassword.form.oldPassword.placeHolder}}" value="{{changePassword.form.oldPassword.value}}" bindblur="changePasswordOldInputBlur" />
+					</mp-cell>
+					<mp-cell title="{{changePassword.form.newPassword.title}}">
+						<input type="text" password="{{true}}" id="{{changePassword.form.newPassword.name}}" placeholder="{{changePassword.form.newPassword.placeHolder}}" value="{{changePassword.form.newPassword.value}}" bindblur="changePasswordNewInputBlur" />
+					</mp-cell>
+				</mp-cells>
+			</mp-form>
+			<view slot="button" class="control">
+				<button class="weui-btn btn-submit btn block" size="default" type="primary" bindtap="submitChangePassword" disabled="{{changePassword.form.submit.disabled}}">{{changePassword.form.submit.title}}</button>
+				<button class="weui-btn btn-tab btn block" size="default" type="default" bindtap="toggleChangePasswordView" data-toggle="false">{{changePassword.btnShowSignInViewTitle}}</button>
+			</view>
+		</mp-form-page>
+	</view>
+</view>

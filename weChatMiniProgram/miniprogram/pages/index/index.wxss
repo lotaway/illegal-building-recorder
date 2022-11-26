@@ -1,0 +1,131 @@
+.account-msg {
+    font-weight: bold;
+}
+
+.container-search {
+    padding: 5px;
+    background: #efeff4;
+}
+
+.container-search .input {
+    height: 40px;
+    line-height: 40px;
+    margin-right: 60px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    text-align: center;
+    background: #fff;
+}
+
+.container-search .btn {
+    float: right;
+    padding: 0;
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
+    border-top-right: 8px;
+    border-bottom-right: 8px;
+    font-size: 12px;
+    background: #fff;
+}
+
+.tip {
+    padding: 5px;
+}
+
+.statistics {
+    margin: 10px 5px;
+}
+
+.statistics .text {
+    padding: 5px 0 0 10px;
+}
+
+.tab-filter {
+    display: flex;
+    width: 100%;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-filter .tab-item {
+    flex: 1;
+    height: 55px;
+    line-height: 20px;
+    text-align: center;
+    border-right: 1px solid #eee;
+    background: #fafafa;
+}
+
+.tab-filter .tab-item.active {
+    background: #eaeaea;
+}
+
+.tab-filter .tab-item:last-child {
+    border-right: none;
+}
+
+.TypeList {
+    width: 100%;
+}
+
+.TypeList .list-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.component-goods-item {
+    margin: 0;
+    position: relative;
+}
+
+.component-goods-item .thumbnail {
+    overflow: hidden;
+    width: 90px;
+    height: 90px;
+    float: left;
+}
+
+.component-goods-item.no-thumbnail .thumbnail {
+    display: none;
+}
+
+.component-goods-item .thumbnail .img {
+    width: 100%;
+}
+
+.component-goods-item .msg {
+    padding: 5px 5px 10px;
+}
+
+.component-goods-item.with-thumbnail .msg {
+    margin-left: 90px;
+}
+
+.component-goods-item .msg .name {
+    display: block;
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.component-goods-item .msg .desc {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 16px;
+    color: #a9a9a9;
+}
+
+.component-goods-item .msg .status {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+
+.component-goods-item .msg .status .value {
+    float: right;
+}

@@ -1,0 +1,14 @@
+@import "../../public/style/app.css";
+
+.page-user .welcome-banner {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.page-user .title {
+    /*display: block;
+    margin: 0 auto;
+    padding: 15px 0;*/
+}

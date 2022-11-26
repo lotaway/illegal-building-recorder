@@ -1,0 +1,2 @@
+<mp-uploader upload="{{uploadFile}}">
+</mp-uploader>

@@ -1,0 +1,126 @@
+/* 微信weui库：https://github.com/Tencent/weui  */
+@import "../libs/weui/weui.min.css";
+
+.page, body {
+    /*background: var(--weui-BG-0);*/
+}
+
+ul, li {
+    list-style: none;
+}
+
+.mp-form {
+    padding-top: 0;
+}
+
+.weui-toptips {
+    display: block;
+}
+
+.mp-cells .weui-cells__title {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 0;
+    background: #ebebeb;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 200px 0;
+    box-sizing: border-box;
+}
+
+.clearf:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.important {
+    color: #09bb07;
+}
+
+.tip {
+    color: #888;
+}
+
+.component-tips {
+    display: block;
+    text-align: center;
+    padding: 10px;
+}
+
+.component-status {
+    text-align: center;
+}
+
+.component-status .value {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 60px;
+    /* line-height: 100%; */
+    margin: 0 0 0 5px;
+    transform: rotateZ(-45deg);
+    padding: 0;
+    background: rgba(255, 255, 255, 0.8);
+    color: #999999;
+    border: 1px solid #999999;
+}
+
+.component-status .value.active {
+    border-color: #09bb07;
+    color: #09bb07;
+}
+
+.component-status .value.warn {
+    border-color: #e94f4f;
+    color: #e94f4f;
+}
+
+.status-no {
+    font-size: 24px;
+    text-align: center;
+    opacity: 0.3;
+    padding: 33% 10px;
+}
+
+.page-title {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 25px 15px;
+    background: #fefefe;
+}
+
+.hide {
+    display: none;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn.disabled {
+    opacity: 0.3;
+}
+
+.btn.block {
+    width: auto;
+    margin: 10px;
+}

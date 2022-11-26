@@ -1,0 +1,9 @@
+<!--layout/attr/attr.wxml-->
+<view class="component-attr">
+  <text class="name">
+  {{name}}
+  </text>
+  <view class="value">
+    <slot></slot>
+  </view>
+</view>

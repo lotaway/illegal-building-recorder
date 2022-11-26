@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    // "isolatedModules": true,
+    "outDir": "../member",
+    "module": "esnext", //  采用的模块系统
+    "moduleResolution": "node", //  模块解析模式
+    // 允许从没有设置默认导出的模块中默认导入
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true, //  启用装饰器
+    "noImplicitAny": true,
+//    "noEmit": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,  //  debug用的sourceMap
+    "target": "es5",  //  编译输出的目标版本
+    "allowJs": true,  //  允许编译js文件
+    "lib": [
+      "es7",
+      "es2017",
+      "dom"
+    ],
+    "typeRoots": [
+      "./typings",
+      "./node_modules/vue/types"
+    ]
+  },
+  "include": [
+    "./web/**/*",
+    "./web/pages/**/*",
+    "./appConfig/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules"
+  ]
+}

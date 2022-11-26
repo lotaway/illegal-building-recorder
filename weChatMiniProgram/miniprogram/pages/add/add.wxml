@@ -1,0 +1,280 @@
+﻿<view class="page-add">
+    <mp-toptips msg="{{form.error.msg}}" type="error" show="{{form.error.isShow}}"></mp-toptips>
+    <mp-msg ext-class="mp-msg" wx:if="{{msg.isShow}}" type="{{msg.type}}" title="{{msg.title}}" desc="{{msg.desc}}">
+        <view slot="handle" class="handler">
+            <button wx:for="{{msg.button}}" type="{{item.classType}}" class="weui-btn" bindtap="msgEventHandler"
+                    wx:key="handlerType"
+                    data-type="{{item.handlerType}}">{{item.title}}
+            </button>
+        </view>
+    </mp-msg>
+    <mp-form-page wx:else>
+        <mp-form ext-class="mp-form">
+            <mp-cells ext-class="mp-cells">
+                <mp-cell title="{{form.msgType.tip}}"
+                         value="{{form.msgType.value === form.msgType.enum.investigate.value ? form.msgType.enum.investigate.title : form.msgType.enum.deal.title}}">
+                </mp-cell>
+                <mp-cell wx:if="{{handlerType === 'edit'}}" title="{{form.codeNumber.title}}"
+                         value="{{form.codeNumber.value}}"></mp-cell>
+            </mp-cells>
+            <view class="weui-form-container" wx:if="{{form.msgType.value === form.msgType.enum.deal.value}}">
+                <mp-cells ext-class="mp-cells">
+                    <mp-cell title="{{form.belongArea.title}}" link hover>
+                        <picker range="{{form.belongArea.list}}" range-key="regionName"
+                                value="{{form.belongArea.selectedIndex}}" bindchange="selectBelongArea">
+                            <view class="picker">{{form.belongArea.value}}</view>
+                        </picker>
+                    </mp-cell>
+                    <mp-cell title="{{form.targetUnit.title}}" link hover>
+                        <picker range="{{form.targetUnit.list}}" range-key="regionName"
+                                value="{{form.targetUnit.selectedIndex}}" bindchange="selectTargetUnit">
+                            <view class="picker">{{form.targetUnit.value}}</view>
+                        </picker>
+                    </mp-cell>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells" title="{{form.buildType.title}}">
+                    <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="radioChange">
+                        <mp-checkbox wx:for="{{form.buildType.list}}" wx:key="value" label="{{item.title}}"
+                                     value="{{item.value}}"
+                                     checked="{{form.buildType.selectedIndex === index}}"></mp-checkbox>
+                    </mp-checkbox-group>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells" title="">
+                    <mp-cell title="{{form.buildName.title}}">
+                        <input class="input" id="{{form.buildName.name}}" value="{{form.buildName.value}}"
+                               placeholder="{{form.buildName.placeHolder}}" bindblur="buildNameBlur"/>
+                    </mp-cell>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells">
+                    <mp-cell
+                            title="{{form.missionDate.title}}">
+                        <picker header-text="{{form.msgType.value === form.msgType.enum.investigate.value ? form.missionDate.investigateTitle : form.missionDate.dealTitle}}"
+                                mode="date"
+                                value="{{form.missionDate.value}}" start="{{form.missionDate.startDate}}"
+                                end="{{form.missionDate.endDate}}"
+                                bindchange="missionDateChange">{{form.missionDate.value ||
+                            form.missionDate.placeHolder}}
+                        </picker>
+                    </mp-cell>
+                </mp-cells>
+                <mp-cells>
+                    <mp-cell title="{{form.buildArea.title + '（' + form.buildArea.valueUnit + '）'}}">
+                        <input class="input" type="digit" value="{{form.buildArea.value}}"
+                               placeholder="{{form.buildArea.placeHolder}}" bindblur="buildAreaBlur"/>
+                    </mp-cell>
+                    <mp-cell title="{{form.buildSituation.title}}">
+                        <input class="input" type="text" value="{{form.buildSituation.value}}"
+                               placeholder="{{form.buildSituation.placeHolder}}" bindblur="buildSituationBlur"/>
+                    </mp-cell>
+                </mp-cells>
+                <mp-cells title="{{form.uploadPhotoTitle}}">
+                    <mp-cell ext-class="mp-cell">
+                        <mp-uploader
+                                title="{{form.beforePhoto.title}}" ext-class="mp-uploader" bindfail="uploadError"
+                                bindsuccess="uploadBeforePhotoSuccess"
+                                binddelete="beforeDealPhotoDelete"
+                                files="{{form.beforePhoto.value}}" max-count="{{form.beforePhoto.maxCount}}"
+                                delete="{{true}}" upload="{{uploadBeforeDealPhotoFile}}"></mp-uploader>
+                    </mp-cell>
+                    <mp-cell ext-class="mp-cell">
+                        <mp-uploader
+                                title="{{form.dealingPhoto.title}}" ext-class="mp-uploader" bindfail="uploadError"
+                                bindsuccess="uploadDealingPhotoSuccess"
+                                binddelete="dealingPhotoDelete"
+                                files="{{form.dealingPhoto.value}}" max-count="{{form.dealingPhoto.maxCount}}"
+                                delete="{{true}}" upload="{{uploadDealingPhotoFile}}"></mp-uploader>
+                    </mp-cell>
+                    <mp-cell ext-class="mp-cell">
+                        <mp-uploader
+                                title="{{form.donePhoto.title}}" ext-class="mp-uploader" bindfail="uploadError"
+                                bindsuccess="uploadDonePhotoSuccess"
+                                binddelete="doneDealPhotoDelete"
+                                files="{{form.donePhoto.value}}" max-count="{{form.donePhoto.maxCount}}"
+                                delete="{{true}}" upload="{{uploadDoneDealPhotoFile}}"></mp-uploader>
+                    </mp-cell>
+                </mp-cells>
+            </view>
+            <view class="weui-form-container" wx:if="{{form.msgType.value === form.msgType.enum.investigate.value}}">
+                <mp-cells ext-class="mp-cells">
+                    <mp-cell title="{{form.buildingAddress.title}}">
+                        <input class="input" type="text" value="{{form.buildingAddress.value}}"
+                               placeholder="{{form.buildingAddress.placeHolder}}" bindblur="buildingAddressBlur"/>
+                    </mp-cell>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells" title="{{form.propertyOwner.title}}">
+                    <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="changePropertyOwnerType">
+                        <mp-checkbox wx:for="{{form.propertyOwner.type.list}}" wx:key="value" label="{{item.title}}"
+                                     value="{{item.value}}"
+                                     checked="{{form.propertyOwner.type.selectedValue === item.value}}"></mp-checkbox>
+                    </mp-checkbox-group>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells">
+                    <mp-cell wx:if="{{form.propertyOwner.type.selectedValue !== propertyOwnerTypeEnum.unknown.value}}"
+                             title="{{form.propertyOwner.type.selectedValue === propertyOwnerTypeEnum.unit.value ? form.propertyOwner.name.unitTitle : form.propertyOwner.name.personalTitle}}">
+                        <input class="input" type="text" value="{{form.propertyOwner.name.value}}"
+                               placeholder="{{form.propertyOwner.type.selectedValue === propertyOwnerTypeEnum.unit.value ? form.propertyOwner.name.unitPlaceHolder : form.propertyOwner.name.personalPlaceHolder}}"
+                               bindblur="propertyOwnerNameBlur"/>
+                    </mp-cell>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells"
+                          wx:if="{{form.propertyOwner.type.selectedValue !== propertyOwnerTypeEnum.unknown.value}}"
+                          title="{{form.propertyOwner.credentialsType.title}}">
+                    <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="changeCredentialsType">
+                        <mp-checkbox
+                                wx:for="{{form.propertyOwner.type.selectedValue === propertyOwnerTypeEnum.unit.value ? form.propertyOwner.credentialsType.unitList : form. propertyOwner.credentialsType.personalList}}"
+                                wx:key="value" label="{{item.title}}"
+                                value="{{item.value}}"
+                                checked="{{(form.propertyOwner.type.selectedValue === propertyOwnerTypeEnum.unit.value ? form.propertyOwner.credentialsType.unitSelectedIndex : form.propertyOwner.credentialsType.personalSelectedIndex) === index}}"></mp-checkbox>
+                    </mp-checkbox-group>
+                    <mp-cell wx:if="{{form.propertyOwner.type.selectedValue !== propertyOwnerTypeEnum.unknown.value}}"
+                             title="{{form.propertyOwner.credentialsNumber.title}}">
+                        <input class="input" type="text" value="{{form.propertyOwner.credentialsNumber.value}}"
+                               placeholder="{{form.propertyOwner.credentialsNumber.placeHolder}}"
+                               bindblur="propertyOwnerCredentialsNumberBlur"/>
+                    </mp-cell>
+                    <mp-cell ext-class="mp-cell no-weui-cell__hd"
+                             wx:if="{{form.propertyOwner.type.selectedValue === propertyOwnerTypeEnum.unit.value}}">
+                        <label for="{{form.propertyOwner.relative.government.name}}">{{form.propertyOwner.relative.government.title}}</label>
+                        <switch slot="footer" id="{{form.propertyOwner.relative.government.name}}"
+                                checked="{{form.propertyOwner.relative.government.selected}}"
+                                bindchange="toggleIsGovernment"/>
+                    </mp-cell>
+                    <mp-cell ext-class="mp-cell no-weui-cell__hd"
+                             wx:if="{{form.propertyOwner.type.selectedValue === propertyOwnerTypeEnum.unit.value}}">
+                        <label for="{{form.propertyOwner.relative.armedForces.name}}">{{form.propertyOwner.relative.armedForces.title}}</label>
+                        <switch slot="footer" id="{{form.propertyOwner.relative.armedForces.name}}"
+                                checked="{{form.propertyOwner.relative.armedForces.selected}}"
+                                bindchange="toggleIsArmedForces"/>
+                    </mp-cell>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells" title="{{form.belongType.title}}">
+                    <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="changeBelongType">
+                        <mp-checkbox wx:for="{{form.belongType.list}}" wx:key="value" label="{{item.title}}"
+                                     value="{{item.value}}"
+                                     checked="{{form.belongType.selectedIndex === index}}"></mp-checkbox>
+                    </mp-checkbox-group>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells" title="{{form.landType.title}}">
+                    <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="changeLandType">
+                        <mp-checkbox wx:for="{{form.landType.list}}" wx:key="value" label="{{item.title}}"
+                                     value="{{item.value}}"
+                                     checked="{{form.landType.selectedIndex === index}}"></mp-checkbox>
+                    </mp-checkbox-group>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells">
+                    <mp-cell ext-class="mp-cell no-weui-cell__hd">
+                        <label for="{{form.curtilage.name}}">{{form.curtilage.title}}</label>
+                        <switch slot="footer" id="{{form.curtilage.name}}"
+                                checked="{{form.curtilage.selected}}"
+                                bindchange="toggleIsCurtilage"/>
+                    </mp-cell>
+                    <mp-cell title="{{form.coverArea.title + '（' + form.coverArea.valueUnit + '）'}}">
+                        <input class="input" type="digit" value="{{form.coverArea.value}}"
+                               placeholder="{{form.coverArea.placeHolder}}" bindblur="coverAreaBlur"/>
+                    </mp-cell>
+                    <mp-cell title="{{form.buildArea.title + '（' + form.buildArea.valueUnit + '）'}}">
+                        <input class="input" type="digit" value="{{form.buildArea.value}}"
+                               placeholder="{{form.buildArea.placeHolder}}" bindblur="buildAreaBlur"/>
+                    </mp-cell>
+                    <mp-cell title="{{form.buildingStorey.title}}">
+                        <input class="input" type="number" value="{{form.buildingStorey.value}}"
+                               placeholder="{{form.buildingStorey.placeHolder}}"
+                               bindblur="buildingStoreyBlur"/>
+                    </mp-cell>
+                    <mp-cell
+                            title="{{form.buildingStartDate.title}}">
+                        <picker header-text="{{form.buildingStartDate.title}}"
+                                mode="date"
+                                value="{{form.buildingStartDate.value}}" start="{{form.buildingStartDate.startDate}}"
+                                end="{{form.buildingStartDate.endDate}}"
+                                bindchange="changeBuildingStartDate">{{form.buildingStartDate.value}}
+                        </picker>
+                    </mp-cell>
+                    <mp-cell
+                            title="{{form.buildingEndDate.title}}">
+                        <picker header-text="{{form.buildingEndDate.title}}"
+                                mode="date"
+                                value="{{form.buildingEndDate.value}}" start="{{form.buildingEndDate.startDate}}"
+                                end="{{form.buildingEndDate.endDate}}"
+                                bindchange="changeBuildingEndDate">{{form.buildingEndDate.value}}
+                        </picker>
+                    </mp-cell>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells" title="{{form.engineeringSituation.title}}">
+                    <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="changeEngineeringSituation">
+                        <mp-checkbox wx:for="{{form.engineeringSituation.list}}" wx:key="value" label="{{item.title}}"
+                                     value="{{item.value}}"
+                                     checked="{{form.engineeringSituation.selectedIndex === index}}"></mp-checkbox>
+                    </mp-checkbox-group>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells" title="{{form.engineeringAge.title}}">
+                    <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="changeEngineeringAge">
+                        <mp-checkbox wx:for="{{form.engineeringAge.list}}" wx:key="value" label="{{item.title}}"
+                                     value="{{item.value}}"
+                                     checked="{{form.engineeringAge.selectedIndex === index}}"></mp-checkbox>
+                    </mp-checkbox-group>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells" title="{{form.useFor.title}}">
+                    <mp-checkbox-group prop="radio" multi="{{true}}" bindchange="changeUseFor">
+                        <mp-checkbox wx:for="{{form.useFor.list}}" wx:key="value" label="{{item.title}}"
+                                     value="{{item.value}}"
+                                     checked="{{item.checked}}"></mp-checkbox>
+                    </mp-checkbox-group>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells" wx:for="{{form.certificate.list}}" wx:key="name">
+                    <mp-cell ext-class="mp-cell no-weui-cell__hd">
+                        <label for="{{'certificate-selector-' + index}}">{{item.title}}</label>
+                        <switch slot="footer" id="{{'certificate-selector-' + index}}" checked="{{item.selected}}"
+                                bindchange="toggleCertificate" data-index="{{index}}"/>
+                    </mp-cell>
+                    <mp-cell wx:if="{{item.selected && item.nameTitle}}">
+                        <label slot="title" for="{{'certificate-name-' + index}}">{{item.nameTitle}}</label>
+                        <input type="text" id="{{'certificate-name-' + index}}" value="{{item.nameValue}}"
+                               placeholder="{{item.nameTitle}}" bindblur="certificateNameBlur" data-index="{{index}}"/>
+                    </mp-cell>
+                    <mp-cell wx:if="{{item.selected && item.numberTitle}}">
+                        <label slot="title" for="{{'certificate-number-' + index}}">{{item.numberTitle}}</label>
+                        <input type="text" id="{{'certificate-number-' + index}}" value="{{item.numberValue}}"
+                               placeholder="{{form.certificate.numberPlaceHolder}}" bindblur="certificateNumberBlur"
+                               data-index="{{index}}"/>
+                    </mp-cell>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells" title="{{form.illegalType.title}}">
+                    <mp-checkbox-group prop="radio" multi="{{true}}" bindchange="changeIllegalType">
+                        <mp-checkbox wx:for="{{form.illegalType.list}}" wx:key="value" label="{{item.title}}"
+                                     value="{{item.value}}"
+                                     checked="{{item.checked}}"></mp-checkbox>
+                    </mp-checkbox-group>
+                </mp-cells>
+                <mp-cells ext-class="mp-cells" wx:for="{{form.otherEvidence.list}}" wx:for-item="oe" wx:key="value">
+                    <mp-cell ext-class="mp-cell no-weui-cell__hd">
+                        <label for="{{'other-evidence-selector-' + index}}">{{oe.title}}</label>
+                        <switch slot="footer" id="{{'other-evidence-selector-' + index}}" checked="{{oe.selected}}"
+                                bindchange="selectOtherEvidence" data-index="{{index}}"/>
+                    </mp-cell>
+                    <mp-cell wx:if="{{oe.selected}}">
+                        <mp-uploader ext-class="mp-uploader" bindfail="uploadError"
+                                     bindsuccess="uploadEvidencePhotoFileSuccess"
+                                     binddelete="otherEvidencePhotoDelete"
+                                     data-index="{{index}}"
+                                     files="{{oe.filePaths}}" max-count="{{oe.maxCount}}"
+                                     delete="{{true}}" upload="{{uploadOtherEvidencePhotoFile}}"></mp-uploader>
+                    </mp-cell>
+                </mp-cells>
+                <mp-cells>
+                    <mp-cell ext-class="mp-cell" wx:for="{{form.joinerMsg.list}}" wx:key="value">
+                        <label slot="title" for="{{item.name}}">{{item.title}}</label>
+                        <input type="text" id="{{item.name}}" value="{{item.value}}" placeholder="{{item.placeHolder}}"
+                               bindblur="joinerBlur" data-index="{{index}}"/>
+                    </mp-cell>
+                </mp-cells>
+            </view>
+        </mp-form>
+        <view slot="button">
+            <button class="weui-btn btn-submit btn block" size="default" type="primary" bindtap="submitInfo"
+                    disabled="{{form.submit.disabled}}">
+                {{form.submit.title}}
+            </button>
+        </view>
+    </mp-form-page>
+</view>

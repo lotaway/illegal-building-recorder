@@ -1,0 +1,6 @@
+<view class="page-handler">
+    <text wx:if="{{false}}" class="page-title">只有</text>
+    <button class="btn block" type="primary" bindtap="showAdd" disabled="{{addDisabled}}">录入摸查信息</button>
+
+    <button class="btn block" type="default" bindtap="showRecord">{{btnShowAllRecordTitle}}</button>
+</view>

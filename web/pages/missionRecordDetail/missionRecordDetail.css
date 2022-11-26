@@ -1,0 +1,54 @@
+@import "../../public/style/app.css";
+
+.mp-cell .weui-cell__hd {
+    width: 40%;
+}
+
+.mp-cell .weui-cell__bd,
+.mp-cell .mp-cell-value {
+    /*width: 60%;*/
+}
+
+.weui-cell__ft {
+    max-width: 60%;
+}
+
+.page-mission-record-detail .photo-list .li {
+    display: inline-block;
+    width: 30%;
+    /*float: left;*/
+    margin: 10px 0 0 3%;
+    vertical-align: top;
+}
+
+.page-mission-record-detail .photo {
+    /*width: 70px;*/
+    /*height: 70px;*/
+    display: block;
+    width: 100%;
+    margin: 5px auto;
+}
+
+.component-status .value {
+    width: 160px;
+    height: 160px;
+    font-size: 36px;
+    line-height: 160px;
+    border-width: 8px;
+    font-weight: bold;
+}
+
+.page-mission-record-detail .status {
+    margin: 10px auto;
+}
+
+.page-mission-record-detail .btn-download-document .text,
+.page-mission-record-detail .btn-download-document .icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.page-mission-record-detail .btn-download-document .icon {
+    width: 16px;
+    height: 16px;
+}

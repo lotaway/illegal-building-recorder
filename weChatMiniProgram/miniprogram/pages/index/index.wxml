@@ -1,0 +1,84 @@
+<!--index.wxml-->
+<view class="page-index">
+    <!--     用户信息   -->
+    <view class="account-msg text-center">当前{{user.isSignIn ? "已登录的账户为" + user.currentUnit + " " + user.name :
+        "请登录后再使用本功能"}}
+    </view>
+    <!--  统计信息  -->
+    <view class="statistics" bindtap="showDocumentTypeSelection">
+        <text class="text">总宗数{{user.statistics.missionRecord}}</text>
+        <text class="text">总面积{{user.statistics.areaSize}}</text>
+        <text class="text">摸查宗数{{user.statistics.investigateMissionRecord}}</text>
+        <text class="text">摸查面积{{user.statistics.investigateArea}}</text>
+        <text class="text">治理宗数{{user.statistics.dealMissionRecord}}</text>
+        <text class="text">治理面积{{user.statistics.dealArea}}</text>
+        <view class="text-center important">下载</view>
+    </view>
+    <view class="container-search">
+        <button class="btn" type="default" disabled="{{record.status === record.statusEnum.loading.value}}"
+                bindtap="search">
+            {{record.filter.keywordPlaceHolder}}
+        </button>
+        <input class="input" type="text" value="{{record.filter.keyword}}" placeholder="{{record.filter.inputTip}}"
+               bindblur="recordSearchBlur"/>
+    </view>
+    <!--    摸查和治理信息两种筛选-->
+    <view class="tab-filter">
+        <text class="{{'tab-item' + (record.filter.msgType.enum.investigate.value === record.filter.msgType.value ? ' active' : '')}}"
+              bindtap="selectMsgType" data-value="{{record.filter.msgType.enum.investigate.value}}">
+            {{record.filter.msgType.enum.investigate.title}}
+        </text>
+        <text class="{{'tab-item' + (record.filter.msgType.enum.deal.value === record.filter.msgType.value ? ' active' : '')}}"
+              bindtap="selectMsgType" data-value="{{record.filter.msgType.enum.deal.value}}">
+            {{record.filter.msgType.enum.deal.title}}
+        </text>
+    </view>
+    <view class="tip">符合条件的信息</view>
+    <view class="TypeList record-list">
+        <view class="record-item item-goods list-item" wx:for="{{record.list}}" wx:key="id">
+            <view class="{{'component-goods-item component-goods-list-item clearf ' + (item.thumbnail ? 'with-thumbnail' : 'no-thumbnail')}}"
+                  bindtap="showRecordDetail" data-index="{{index}}">
+                <view class="thumbnail">
+                    <image mode="widthFix" class="img" src="{{item.thumbnail}}"></image>
+                </view>
+                <view class="msg">
+                    <text class="name">{{item.title}}</text>
+                    <text class="desc">{{item.desc}}</text>
+                    <view class="status component-status clearf">
+                        <text class="value disabled"
+                              wx:if="{{item.status === recordStatusEnum.waitForCheck.value}}">
+                            {{recordStatusEnum.waitForCheck.title}}
+                        </text>
+                        <text class="value active"
+                              wx:if="{{item.status >= recordStatusEnum.checked.value && item.status !== recordStatusEnum.unlocked.value}}">
+                            {{recordStatusEnum.checked.title2}}
+                        </text>
+                        <text class="value disabled" wx:if="{{item.status === recordStatusEnum.checked.value}}">
+                            {{recordStatusEnum.checked.title}}
+                        </text>
+                        <text class="value active" wx:if="{{item.status >= recordStatusEnum.confirmed.value && item.status !== recordStatusEnum.unlocked.value}}">
+                            {{recordStatusEnum.confirmed.title2}}
+                        </text>
+                        <text class="value disabled" wx:if="{{item.status === recordStatusEnum.confirmed.value}}">
+                            {{recordStatusEnum.confirmed.title}}
+                        </text>
+                        <text class="value active" wx:if="{{item.status === recordStatusEnum.reconfirmed.value}}">
+                            {{recordStatusEnum.reconfirmed.title}}
+                        </text>
+                        <text class="value warn"
+                              wx:if="{{item.status === recordStatusEnum.unlocked.value}}">
+                            {{recordStatusEnum.unlocked.title}}
+                        </text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <mp-loading wx:if="{{record.status === record.statusEnum.loading.value}}" type="circle"></mp-loading>
+        <view class="{{'status-no' + (!record.list.length && record.status === record.statusEnum.end.value ? '' : ' hide')}}">
+            <text>找不到任务记录</text>
+        </view>
+        <view class="{{'component-tips' + (record.list.length && record.status === record.statusEnum.end.value ? '' : ' hide')}}">
+            <text>没有更多记录了</text>
+        </view>
+    </view>
+</view>
